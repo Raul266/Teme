@@ -19,22 +19,32 @@ de mai sus, astfel că îți recomandăm să folosești mai multe site-uri
 '''
 import time
 
+'''
+Exertcitiu 1 Login:
+import time
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 chrome = webdriver.Chrome()
 chrome.get('https://www.phptravels.net/')
-Login = chrome.find_element(By.ID,"ACCOUNT")
-Login.click()
-Login = chrome.find_element(By.LINK_TEXT,"Customer Login")
-Login.click()
-Login = chrome.find_element(By.NAME, "email")
-Login.send_keys("albus.raul97@yahoo.ro")
-Login = chrome.find_element(By.NAME, "password")
-Login.send_keys("parolaraul1")
-Login = chrome.find_element(By.CSS_SELECTOR,"label[for = 'rememberchb']")
-Login.click()
+login = chrome.find_element(By.ID,"ACCOUNT").click()
+login = chrome.find_element(By.LINK_TEXT,"Customer Login").click()
+login = chrome.find_element(By.NAME, "email").send_keys("albus.raul97@yahoo.ro")
+login = chrome.find_element(By.NAME, "password").send_keys("parolaraul1")
+login = chrome.find_element(By.CSS_SELECTOR,"label[for = 'rememberchb']").click()
 time.sleep(3)
-Login = chrome.find_element(By.CSS_SELECTOR,"button[type = 'submit']")
-Login.click()
+login = chrome.find_element(By.CSS_SELECTOR,"button[type = 'submit']").click()
 time.sleep(10)
-# In programul anterior este testarea automata a unei logari pe site'ul respectiv
+# In programul anterior este testarea automata a unei logari pe site'ul respectiv'''
+
+# Exercitiul 2:
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+chrome = webdriver.Chrome()
+chrome.get('https://formy-project.herokuapp.com/')
+formy = chrome.find_element(By.LINK_TEXT, "Autocomplete").click()
+formy = chrome.find_element(By.XPATH, "//input[@placeholder = 'Enter address']")# aici as vrea sa scriu in campul asta
+# orice as pune nu reusesc nici cum primesc eroare, cand dau search in inspector imi gaseste exact asta, dar cand rulez
+# programul primesc eroare.
+formy.send_keys("Oras Cluj-Napoca")
+time.sleep(3)
