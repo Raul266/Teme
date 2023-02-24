@@ -46,6 +46,6 @@ formy = chrome.find_element(By.LINK_TEXT, "Autocomplete").click()
 formy = chrome.find_element(By.XPATH, "//input[@placeholder = 'Enter address']")# aici as vrea sa scriu in campul asta
 # orice as pune nu reusesc nici cum primesc eroare, cand dau search in inspector imi gaseste exact asta, dar cand rulez
 # programul primesc eroare.
-formy.send_keys("Oras Cluj-Napoca")
 
+formy.send_keys("Oras Cluj-Napoca")
 time.sleep(3)
