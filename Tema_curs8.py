@@ -19,6 +19,7 @@ de mai sus, astfel că îți recomandăm să folosești mai multe site-uri
 '''
 import time
 
+from selenium.webdriver.chrome.webdriver import WebDriver
 '''
 Exertcitiu 1 Login:
 import time
@@ -40,13 +41,13 @@ time.sleep(10)
 # Exercitiul 2:
 from selenium import webdriver, WebDriverWait
 from selenium.webdriver.common.by import By
-chrome = webdriver.Chrome()
+chrome: WebDriver = webdriver.Chrome()
 chrome.get('https://formy-project.herokuapp.com/')
 formy = chrome.find_element(By.LINK_TEXT, "Autocomplete").click()
-formy = chrome.find_element(By.XPATH, "//input[@placeholder = 'Enter address']")# aici as vrea sa scriu in campul asta
+formy = chrome.find_element(By.XPATH, '//input[@placeholder = "Enter address"]')# aici as vrea sa scriu in campul asta
 # orice as pune nu reusesc nici cum primesc eroare, cand dau search in inspector imi gaseste exact asta, dar cand rulez
 # programul primesc eroare.
-chrome.implicitly_wait(5)
-# formy = WebDriverWait(chrome, 10).until(chrome.find_element(By.XPATH, "//input[@placeholder = 'Enter address']"))
+# chrome.implicitly_wait(5)
+# formy = WebDriverWait().until(chrome.find_element(By.XPATH, '//input[@placeholder = "Enter address"]'))
 formy.send_keys("Oras Cluj-Napoca")
 time.sleep(3)
