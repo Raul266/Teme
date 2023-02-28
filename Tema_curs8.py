@@ -1,6 +1,5 @@
 '''Alege-ți unuul sau mai multe din sugestiile de site-uri de mai jos
 - https://www.phptravels.net/
-- http://automationpractice.com/index.php
 - https://formy-project.herokuapp.com/
 - https://the-internet.herokuapp.com/
 - https://www.techlistic.com/p/selenium-practice-form.html
@@ -20,6 +19,9 @@ de mai sus, astfel că îți recomandăm să folosești mai multe site-uri
 import time
 
 from selenium.webdriver.chrome.webdriver import WebDriver
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.wait import WebDriverWait
+
 '''
 Exertcitiu 1 Login:
 import time
@@ -38,16 +40,17 @@ login = chrome.find_element(By.CSS_SELECTOR,"button[type = 'submit']").click()
 time.sleep(10)
 # In programul anterior este testarea automata a unei logari pe site'ul respectiv'''
 
-# Exercitiul 2:
-from selenium import webdriver, WebDriverWait
+# Exercitiul 2: #La acest exercitiu am complectat formularul de la 'Autocomplete'
+from selenium import webdriver
 from selenium.webdriver.common.by import By
-chrome: WebDriver = webdriver.Chrome()
+'''chrome: WebDriver = webdriver.Chrome()
+chrome.implicitly_wait(5)
 chrome.get('https://formy-project.herokuapp.com/')
 formy = chrome.find_element(By.LINK_TEXT, "Autocomplete").click()
-formy = chrome.find_element(By.XPATH, '//input[@placeholder = "Enter address"]')# aici as vrea sa scriu in campul asta
-# orice as pune nu reusesc nici cum primesc eroare, cand dau search in inspector imi gaseste exact asta, dar cand rulez
-# programul primesc eroare.
-# chrome.implicitly_wait(5)
-# formy = WebDriverWait().until(chrome.find_element(By.XPATH, '//input[@placeholder = "Enter address"]'))
-formy.send_keys("Oras Cluj-Napoca")
-time.sleep(3)
+formy = chrome.find_element(By.XPATH, '//input[@placeholder = "Enter address"]').send_keys("Oras Cluj-Napoca")
+formy = WebDriverWait(chrome,5).until(expected_conditions.presence_of_element_located((By.XPATH,'//input[@placeholder = "Enter address"]')))
+formy = chrome.find_element(By.CSS_SELECTOR, '#street_number').send_keys('Str. Mehedinti nr.58-60')
+formy = chrome.find_element(By.ID, 'locality').send_keys('Cluj-Napoca')
+formy = chrome.find_element(By.CSS_SELECTOR, '.form-control').send_keys('36000')
+formy = chrome.find_element(By.CSS_SELECTOR, "input[placeholder = 'Country']").send_keys('Romania')
+time.sleep(3)'''
