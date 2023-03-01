@@ -54,3 +54,7 @@ formy = chrome.find_element(By.ID, 'locality').send_keys('Cluj-Napoca')
 formy = chrome.find_element(By.CSS_SELECTOR, '.form-control').send_keys('36000')
 formy = chrome.find_element(By.CSS_SELECTOR, "input[placeholder = 'Country']").send_keys('Romania')
 time.sleep(3)'''
+
+# Exercitiul 3
+chrome: webdriver = webdriver.Chrome()
+chrome.get('https://the-internet.herokuapp.com/')
