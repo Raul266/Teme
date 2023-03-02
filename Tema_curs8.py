@@ -58,3 +58,10 @@ time.sleep(3)'''
 # Exercitiul 3
 chrome: webdriver = webdriver.Chrome()
 chrome.get('https://the-internet.herokuapp.com/')
+add_remove = chrome.find_element(By.LINK_TEXT, "Add/Remove Elements").click()
+add_remove = chrome.find_element(By.XPATH,"//button[1]").click() # facem click pe Add Element
+add_remove = chrome.find_element(By.XPATH, '//button[@class = "added-manually"]').click() # facem click pe Delete
+add_remove = chrome.find_element(By.TAG_NAME,'h3')
+print(add_remove.text) #printam in python titlul de pe site
+
+time.sleep(5)
