@@ -2,7 +2,6 @@
 - https://www.phptravels.net/
 - https://formy-project.herokuapp.com/
 - https://the-internet.herokuapp.com/
-- https://www.techlistic.com/p/selenium-practice-form.html
 - jules.app
 Alege câte 3 elemente din fiecare tip de selector din următoarele categorii:
 ● Id
@@ -44,7 +43,7 @@ time.sleep(10)
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 '''chrome: WebDriver = webdriver.Chrome()
-chrome.implicitly_wait(5)
+chrome.implicitly_wait(5) # am folosit acest implicitly wait pt ca altfel primim eroare
 chrome.get('https://formy-project.herokuapp.com/')
 formy = chrome.find_element(By.LINK_TEXT, "Autocomplete").click()
 formy = chrome.find_element(By.XPATH, '//input[@placeholder = "Enter address"]').send_keys("Oras Cluj-Napoca")
@@ -56,12 +55,19 @@ formy = chrome.find_element(By.CSS_SELECTOR, "input[placeholder = 'Country']").s
 time.sleep(3)'''
 
 # Exercitiul 3
-chrome: webdriver = webdriver.Chrome()
+'''chrome: webdriver = webdriver.Chrome()
 chrome.get('https://the-internet.herokuapp.com/')
 add_remove = chrome.find_element(By.LINK_TEXT, "Add/Remove Elements").click()
 add_remove = chrome.find_element(By.XPATH,"//button[1]").click() # facem click pe Add Element
 add_remove = chrome.find_element(By.XPATH, '//button[@class = "added-manually"]').click() # facem click pe Delete
 add_remove = chrome.find_element(By.TAG_NAME,'h3')
 print(add_remove.text) #printam in python titlul de pe site
+time.sleep(4)'''
 
-time.sleep(5)
+# Exercitiul 4
+'''chrome: webdriver = webdriver.Chrome()
+chrome.get('https://jules.app/sign-in')
+login = chrome.find_element(By.XPATH, '(//input[@autocomplete="on"])[1]').send_keys('albus.raul97@yahoo.ro')
+login = chrome.find_element(By.XPATH, '(//input[@autocomplete = "on"])[2]').send_keys('Raul12345')
+login = chrome.find_element(By.CSS_SELECTOR, '.MuiButton-label').click()
+time.sleep(5)'''
