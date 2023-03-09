@@ -57,11 +57,15 @@ Password)
 '''
 
 class Login(unittest.TestCase):
-    chrome: webdriver = webdriver.Chrome()
-    chrome.get('https://the-internet.herokuapp.com/')
-    form = chrome.find_element(By.LINK_TEXT, 'Form Authentication').click()
-    # test 1
-    actual = chrome.current_url
-    expected = 'https://the-internet.herokuapp.com/'
-    self.assertEqual()
+    def setUp(self):
+        self.chrome: webdriver = webdriver.Chrome()
+        self.chrome.get('https://the-internet.herokuapp.com/')
+        form = self.chrome.find_element(By.LINK_TEXT, 'Form Authentication').click()
+    def tearDown(self):
+        self.chrome.quit()
+    def test1(self):
+        # form = chrome.find_element(By.LINK_TEXT, 'Form Authentication').click()
+        actual = self.chrome.current_url
+        expected = 'https://the-internet.herokuapp.com/'
+        self.assertEqual(actual,expected,'Link-urile NU sunt la fel')
 
