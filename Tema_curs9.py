@@ -68,4 +68,6 @@ class Login(unittest.TestCase):
         actual = self.chrome.current_url
         expected = 'https://the-internet.herokuapp.com/'
         self.assertEqual(actual,expected,'Link-urile NU sunt la fel')
+    def test2(self):
+
 
