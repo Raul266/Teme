@@ -1,4 +1,5 @@
 import unittest
+import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
@@ -57,17 +58,59 @@ Password)
 '''
 
 class Login(unittest.TestCase):
+    def click_login(self):
+        login = self.chrome.find_element(By.TAG_NAME, "i").click()
     def setUp(self):
         self.chrome: webdriver = webdriver.Chrome()
         self.chrome.get('https://the-internet.herokuapp.com/')
         form = self.chrome.find_element(By.LINK_TEXT, 'Form Authentication').click()
+
     def tearDown(self):
         self.chrome.quit()
+
     def test1(self):
-        # form = chrome.find_element(By.LINK_TEXT, 'Form Authentication').click()
         actual = self.chrome.current_url
-        expected = 'https://the-internet.herokuapp.com/'
+        expected = 'https://the-internet.herokuapp.com/login'
         self.assertEqual(actual,expected,'Link-urile NU sunt la fel')
+
     def test2(self):
+        actual = self.chrome.find_element(By.TAG_NAME, "h2").text
+        expected = "Login Page"
+        self.assertEqual(actual,expected,"Titulul de pe pagina este diferit de ceea ce ne asteptam")
+
+    def test3(self):# nu stiu daca am inteles bine cerinta!?
+        actual = self.chrome.find_element(By.XPATH, "//h2").text
+        expected = "Login Page"
+        self.assertEqual(actual, expected, "Textul afisat nu e corect")
+
+    def test4(self):
+        actual = self.chrome.find_element(By.TAG_NAME,"i").text
+        expected = "Login"
+        self.assertEqual(expected,actual,"Butonul de login nu e afisat in pagina")
+
+    #def test5(self): Nu am inteles cerinta
+
+    def test6(self):# HELP!!!# aici nu stiu daca am facut corect nu am nici o alta idee..
+        self.click_login()
+        actual = self.chrome.find_element(By.XPATH,'//div[@class="flash error"]')
+        self.assertTrue(actual,"Mesajul de eroare NU este afisat")
+
+    def test7(self):
+        login_user = self.chrome.find_element(By.NAME, 'username').send_keys('alabala')
+        login_pass = self.chrome.find_element(By.NAME, 'password').send_keys('alabala')
+        self.click_login()
+        actual = self.chrome.find_element(By.XPATH, '//div[@class="flash error"]')
+        expected = 'Your username is invalid!'
+        self.assertTrue(expected in actual, 'Error message text is incorrect')
+        # aici m-am blocat primesc eroarea asta: self.assertTrue(expected in actual, 'Error message text is incorrect')
+        #                     ^^^^^^^^^^^^^^^^^^
+        # TypeError: argument of type 'WebElement' is not iterable
+        time.sleep(3)
+
+
+
+
+
+
 
 
