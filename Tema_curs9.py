@@ -106,6 +106,7 @@ class Login(unittest.TestCase):
         #                     ^^^^^^^^^^^^^^^^^^
         # TypeError: argument of type 'WebElement' is not iterable
         time.sleep(3)
+        
 
 
 
