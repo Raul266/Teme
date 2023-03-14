@@ -144,8 +144,8 @@ class Login(unittest.TestCase):
         actual = flash_succes.text
         expected = 'secure area!'
         self.assertTrue(flash_succes.is_displayed(),"Elelmentul nu este afisat")
-        self.assertTrue(expected in actual,"Mesajul nu contine 'secure arena'")# !!!!daca il fac singur assertul acesta imi trece testul e ok daca nu comentez celelate asserturi nu trece testul
-
+        self.assertTrue(expected in actual,"Mesajul nu contine 'secure arena'")
+        
     def testul11(self):
         self.login('tomsmith', 'SuperSecretPassword!')
         self.click_login()
