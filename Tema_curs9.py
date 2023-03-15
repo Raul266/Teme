@@ -107,10 +107,11 @@ class Login(unittest.TestCase):
         expected = 'http://elementalselenium.com/'
         self.assertEqual(actual,expected, "Atributul href al linkului ‘Elemental Selenium’ NU corect")
 
-    def test6(self):# HELP!!!# aici nu stiu daca am facut corect nu am nici o alta idee..
+    def test6(self):
+        self.login('','')
         self.click_login()
-        actual = self.chrome.find_element(By.XPATH,'//div[@class="flash error"]').text
-        self.assertTrue(actual,"Mesajul de eroare NU este afisat")
+        actual = self.chrome.find_element(By.XPATH,'//div[@class="flash error"]')
+        self.assertTrue(actual.is_displayed(),"Mesajul de eroare NU este afisat")
 
     def test7(self):
         self.login('alabala','alabala')
@@ -153,3 +154,24 @@ class Login(unittest.TestCase):
         actual=self.chrome.current_url
         expected = 'https://the-internet.herokuapp.com/login'
         self.assertEqual(actual,expected,'Nu ne-am putut deloga')
+
+    '''● Test12 - brute force password hacking
+    - Completează user tomsmith
+    - Găsește elementul // h4
+    - Ia textul de pe el și fă split după spațiu. Consideră fiecare cuvânt ca o potențială parolă.
+    - Folosește o structură iterativă prin care să introduci rând pe rând parolele și să apeși pe login.
+    - La final testul trebuie să îmi printeze fie
+        ‘Nu am reușit să găsesc parola’
+        ‘Parola secretă este [parola]’
+    '''
+    def test12(self):
+        parola = self.chrome.find_element(By.XPATH, '//h4').text.split()
+        for i in range(len(parola)):
+            self.chrome.find_element(By.NAME, 'username').send_keys('tomsmith')
+            password = self.chrome.find_element(By.NAME, 'password').send_keys(parola[i])
+            self.click_login()
+        # print('Nu am reușit să găsesc parola')
+        # print(f"Parola secretă este {parola}")
+        self.assertTrue(password in parola,f'Ai introdus parola {parola}')
+        time.sleep(2)
+
