@@ -3,7 +3,6 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
@@ -62,18 +61,19 @@ Password)
 - Verifică dacă ai ajuns pe https://the-internet.herokuapp.com/login
 '''
 
-class Login(unittest.TestCase):
-    def __init__(self, methodName: str = ...):
-        super().__init__(methodName)
-        self.expected_conditions = None
 
-    def login(self,username,password):
+class Login(unittest.TestCase):
+
+    def login_click(self, username, password):
         self.chrome.find_element(By.NAME, 'username').send_keys(username)
         self.chrome.find_element(By.NAME, 'password').send_keys(password)
+        self.chrome.find_element(By.TAG_NAME, "i").click()
+
     def click_login(self):
         self.chrome.find_element(By.TAG_NAME, "i").click()
     def click_logout(self):
         self.chrome.find_element(By.XPATH, '//a [@class = "button secondary radius"]').click()
+
     def setUp(self):
         self.chrome: webdriver = webdriver.Chrome()
         self.chrome.get('https://the-internet.herokuapp.com/')
@@ -85,75 +85,72 @@ class Login(unittest.TestCase):
     def test1(self):
         actual = self.chrome.current_url
         expected = 'https://the-internet.herokuapp.com/login'
-        self.assertEqual(actual,expected,'Link-urile NU sunt la fel')
+        self.assertEqual(actual, expected, 'Link-urile NU sunt la fel')
 
     def test2(self):
         actual = self.chrome.find_element(By.TAG_NAME, "h2").text
         expected = "Login Page"
-        self.assertEqual(actual,expected,"Titulul de pe pagina este diferit de ceea ce ne asteptam")
+        self.assertEqual(actual, expected, "Titulul de pe pagina este diferit de ceea ce ne asteptam")
 
-    def test3(self):# nu stiu daca am inteles bine cerinta!?
+    def test3(self):  # nu stiu daca am inteles bine cerinta!?
         actual = self.chrome.find_element(By.XPATH, "//h2").text
         expected = "Login Page"
         self.assertEqual(actual, expected, "Textul afisat nu e corect")
 
     def test4(self):
-        actual = self.chrome.find_element(By.TAG_NAME,"i").text
+        actual = self.chrome.find_element(By.TAG_NAME, "i").text
         expected = "Login"
-        self.assertEqual(expected,actual,"Butonul de login nu e afisat in pagina")
+        self.assertEqual(expected, actual, "Butonul de login nu e afisat in pagina")
 
     def test5(self):
-        actual = self.chrome.find_element(By.LINK_TEXT,"Elemental Selenium").get_attribute('href')
+        actual = self.chrome.find_element(By.LINK_TEXT, "Elemental Selenium").get_attribute('href')
         expected = 'http://elementalselenium.com/'
-        self.assertEqual(actual,expected, "Atributul href al linkului ‘Elemental Selenium’ NU corect")
+        self.assertEqual(actual, expected, "Atributul href al linkului ‘Elemental Selenium’ NU corect")
 
     def test6(self):
-        self.login('','')
-        self.click_login()
-        actual = self.chrome.find_element(By.XPATH,'//div[@class="flash error"]')
-        self.assertTrue(actual.is_displayed(),"Mesajul de eroare NU este afisat")
+        self.login_click('', '')
+        actual = self.chrome.find_element(By.XPATH, '//div[@class="flash error"]')
+        self.assertTrue(actual.is_displayed(), "Mesajul de eroare NU este afisat")
 
     def test7(self):
-        self.login('alabala','alabala')
-        self.click_login()
+        self.login_click('alabala', 'alabala')
         actual = self.chrome.find_element(By.XPATH, '//div[@class="flash error"]').text
         expected = 'Your username is invalid!'
         self.assertTrue(expected in actual, 'Error message text is incorrect')
 
-
     def test8(self):
-        self.login('','')
-        self.click_login()
+        self.login_click('', '')
         self.chrome.maximize_window()
         self.chrome.find_element(By.CLASS_NAME, "close").click()
         expected = self.chrome.find_element(By.XPATH, '// div[@class = "flash error"]')
-        self.assertTrue(expected.is_displayed(),"Eroarea este afisata")
+        self.assertTrue(expected.is_displayed(), "Eroarea este afisata")
         time.sleep(2)
+
     def test9(self):
-        lista_label= self.chrome.find_elements(By.XPATH,"//label")
+        lista_label = self.chrome.find_elements(By.XPATH, "//label")
         assert lista_label[0].text == "Username"
         assert lista_label[1].text == "Password"
-    def test10(self):
-        self.login('tomsmith','SuperSecretPassword!')
-        self.click_login()
-        actual = self.chrome.current_url
-        expected =  'https://the-internet.herokuapp.com/secure'
-        self.assertEqual(actual,expected,"Noul NU url contine '/secure sau este diferit '")
 
-        WebDriverWait(self.chrome, 3).until(expected_conditions.presence_of_element_located((By.XPATH,"//div[@class = 'flash success']")))
-        flash_succes = self.chrome.find_element(By.XPATH,"//div[@class = 'flash success']")
+    def test10(self):
+        self.login_click('tomsmith', 'SuperSecretPassword!')
+        actual = self.chrome.current_url
+        expected = 'https://the-internet.herokuapp.com/secure'
+        self.assertEqual(actual, expected, "Noul NU url contine '/secure sau este diferit '")
+
+        WebDriverWait(self.chrome, 3).until(
+            expected_conditions.presence_of_element_located((By.XPATH, "//div[@class = 'flash success']")))
+        flash_succes = self.chrome.find_element(By.XPATH, "//div[@class = 'flash success']")
         actual = flash_succes.text
         expected = 'secure area!'
-        self.assertTrue(flash_succes.is_displayed(),"Elelmentul nu este afisat")
-        self.assertTrue(expected in actual,"Mesajul nu contine 'secure arena'")
+        self.assertTrue(flash_succes.is_displayed(), "Elelmentul nu este afisat")
+        self.assertTrue(expected in actual, "Mesajul nu contine 'secure arena'")
 
     def testul11(self):
-        self.login('tomsmith', 'SuperSecretPassword!')
-        self.click_login()
+        self.login_click('tomsmith', 'SuperSecretPassword!')
         self.click_logout()
-        actual=self.chrome.current_url
+        actual = self.chrome.current_url
         expected = 'https://the-internet.herokuapp.com/login'
-        self.assertEqual(actual,expected,'Nu ne-am putut deloga')
+        self.assertEqual(actual, expected, 'Nu ne-am putut deloga')
 
     '''● Test12 - brute force password hacking
     - Completează user tomsmith
@@ -164,13 +161,17 @@ class Login(unittest.TestCase):
         ‘Nu am reușit să găsesc parola’
         ‘Parola secretă este [parola]’
     '''
+
     def test12(self):
         parola = self.chrome.find_element(By.XPATH, '//h4').text.split()
         for i in range(len(parola)):
             self.chrome.find_element(By.NAME, 'username').send_keys('tomsmith')
-            password = self.chrome.find_element(By.NAME, 'password').send_keys(parola[i])
+            self.chrome.find_element(By.NAME, 'password').send_keys(parola[i])
             self.click_login()
-        # print('Nu am reușit să găsesc parola')
-        # print(f"Parola secretă este {parola}")
-        self.assertTrue(password in parola,f'Ai introdus parola {parola}')
-        time.sleep(2)
+            if self.chrome.current_url == "https://the-internet.herokuapp.com/secure":
+                print(f"Parola secretă este {parola[i]}")
+                break
+            else:
+                print('Nu am reușit să găsesc parola')
+        time.sleep(3)
+
