@@ -174,4 +174,3 @@ class Login(unittest.TestCase):
         # print(f"Parola secretă este {parola}")
         self.assertTrue(password in parola,f'Ai introdus parola {parola}')
         time.sleep(2)
-
