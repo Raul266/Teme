@@ -161,7 +161,7 @@ class Login(unittest.TestCase):
         ‘Nu am reușit să găsesc parola’
         ‘Parola secretă este [parola]’
     '''
-
+    
     def test12(self):
         parola = self.chrome.find_element(By.XPATH, '//h4').text.split()
         for i in range(len(parola)):
