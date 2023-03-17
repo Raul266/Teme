@@ -145,7 +145,7 @@ class Login(unittest.TestCase):
         self.assertTrue(flash_succes.is_displayed(), "Elelmentul nu este afisat")
         self.assertTrue(expected in actual, "Mesajul nu contine 'secure arena'")
 
-    def testul11(self):
+    def test11(self):
         self.login_click('tomsmith', 'SuperSecretPassword!')
         self.click_logout()
         actual = self.chrome.current_url
@@ -161,7 +161,7 @@ class Login(unittest.TestCase):
         ‘Nu am reușit să găsesc parola’
         ‘Parola secretă este [parola]’
     '''
-    
+
     def test12(self):
         parola = self.chrome.find_element(By.XPATH, '//h4').text.split()
         for i in range(len(parola)):
