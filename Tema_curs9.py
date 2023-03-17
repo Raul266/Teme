@@ -174,3 +174,4 @@ class Login(unittest.TestCase):
             else:
                 print('Nu am reușit să găsesc parola')
         time.sleep(3)
+        
