@@ -19,10 +19,10 @@ class LoginTestSuits(unittest.TestCase):
         ])
 
         runner = HTMLTestRunner(
-            title="Tests Tema 9",
+            title="Tests Tema 8,9,10",
             verbosity=2,
-            description='Teste tema 9',
+            description='Teste tema 8,9,10',
             tested_by='Raul',
-            report_name='Test tema 9'
+            report_name='Test tema 8,9,10'
         )
         runner.run(login_tests)
