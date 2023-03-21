@@ -4,6 +4,7 @@ from HTMLTestRunner import HTMLTestRunner
 
 from Tema_curs9 import Login
 from TesteCurs8_10.Class_curs8 import LoginTema8
+from TesteCurs8_10.Class_curs8 import JulesLogin
 from TesteCurs8_10.bad_login_tests import BadLoginTests
 from TesteCurs8_10.good_login_tests import GoodLoginTests
 
@@ -14,6 +15,7 @@ class LoginTestSuits(unittest.TestCase):
         login_tests.addTests([
             TestLoader().loadTestsFromTestCase(Login),
             TestLoader().loadTestsFromTestCase(LoginTema8),
+            TestLoader().loadTestsFromTestCase(JulesLogin),
             TestLoader().loadTestsFromTestCase(BadLoginTests),
             TestLoader().loadTestsFromTestCase(GoodLoginTests)
         ])
@@ -26,3 +28,4 @@ class LoginTestSuits(unittest.TestCase):
             report_name='Test tema 8,9,10'
         )
         runner.run(login_tests)
+
